@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "CF Copy Input",
+  "version": "1.0",
+  "description": "Faster way to copy test cases in CF.",
+  "content_scripts": [
+    {
+      "matches": ["*://*.codeforces.com/*"],
+      "js": ["cf.js"]
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "CFTestCaseCopyHelper@AbdallahDarwish.com"
+    }
+  }
+}
