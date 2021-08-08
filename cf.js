@@ -1,3 +1,5 @@
+//Function to copy case code
+//it expects an ancesto of the pre element as a param 
 let copyPreCode =
   "" +
   function copyPre(caller) {
@@ -6,11 +8,13 @@ let copyPreCode =
     let newCase = oldCase.replace("\n\n", "\n");
     navigator.clipboard.writeText(newCase);
   };
+//script element to add copyPre function to the page
 let script = document.createElement("script");
 script.textContent = copyPreCode;
 (document.head || document.documentElement).appendChild(script);
 script.remove();
 
+//copy button style
 let stylesCode = `
 .input-output-copier:hover {
     background-color: #def;
@@ -32,7 +36,9 @@ let stylesCode = `
 let styles = document.createElement("style");
 styles.textContent = stylesCode;
 document.head.appendChild(styles);
-const xy = function x() {
+
+//Callback that will be called each time body element is updated, and it will add the button above pres that don't have "cfed" class
+const observerCallback = function x() {
   let inputs = document.querySelectorAll("pre.input:not(.cfed)");
   for (const i of inputs) {
     i.classList.add("cfed");
@@ -52,11 +58,11 @@ const xy = function x() {
     }
   }
 };
-let obs = new MutationObserver(xy);
-const confx = {
+let observer = new MutationObserver(observerCallback);
+const observerConfig = {
   subtree: true,
   childList: true,
   attributes: true,
   characterData: true,
 };
-obs.observe(document.body, confx);
+observer.observe(document.body, observerConfig);
